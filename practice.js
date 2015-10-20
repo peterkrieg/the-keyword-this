@@ -1,19 +1,33 @@
 //We're in a job interview. Answer the following questions (try to not look at your notes unless you have to).
   // 1) What is the purpose of the 'this keyword'?
 
-      //Answer
+      // The 'this' keyword allows us to create data structures in javascript that can be 
+      // defined based on an unspecified object.  The object can be assigned implicity, explicityly,
+      // with the new keyword, or default.
 
   // 2) What are the four rules that govern what the 'this keyword' is bound to and describe each?
 
-      //Answer
+      // implicity, explicitly, new keyword, or default.  Implicity is when you call a method on a function,
+      // the this is assigned to whatever the object to the left of the method is (object.method).  
+      // explicity assigning is when you use methods call() apply(), or bind(), to pass in the object
+      // that this corresponds to, specifically.
+      // new keyword allows you to create new object from constructor function, where this corresponds to
+      // whatever object you're assigning left of new keyword
+      // default rule is that this corresponds to window object, if you use it in global scope, 
+      // with no reference to global scope
 
   // 3) What is the difference between call and apply?
 
-      //Answer
+      //  call takes in comma separated list of parameters (after first param is what this is bound to )
+      // apply takes in same first param, but 2nd param is argument, which contains params
+      // both work in very similar way, besides this small difference
 
   // 4) What does .bind do?
 
-      //Answer
+      // bind allows you to create a new function, based on which object you bind.  unlike call/apply, which
+      // invoke function immediately, bind doesn't invoke, and instead you need to store functino somewhere,
+      // either using callback, or variable assignment.  bind() also means you don't need to pass in all arguments
+      // with bind, you can past ones that aren't defined later, when actually invoking the function.
 
 
 //Next Problem
@@ -47,7 +61,7 @@ function Car(make, model, year, position){
   this.make = make;
   this.model = model;
   this.year = year;
-  this. position = position || 0;   // default value of position prop is 0, ie if nothing is entered in
+  this.position = position || 0;   // default value of position prop is 0, ie if nothing is entered in
 }
 
 
@@ -97,7 +111,7 @@ var getUsername = function(){
   console.log(this.username);
 };
 
-setTimeout(getUsername, 5000);
+setTimeout(getUsername, 2000);
 
 //Above you're given an object, a function, and a setTimeout invocation. 
 // After 5 seconds, what will the getUsername function return?
@@ -107,11 +121,14 @@ setTimeout(getUsername, 5000);
 
 //In the example above, what is the 'this keyword' bound to when getUsername runs?
 
-  // this is bound to global scope... I think.  It definitely isn't bound to the object, which it needs to be
+  // this is bound to global scope, window.  It definitely isn't bound to the object, which it needs to be
 
 //Fix the setTimeout invocation so that the user object will be the focal object when getUsername is ran.
 
-user.getUsername = getUsername;
-setTimeout(user.getUsername, 5000);
+setTimeout(getUsername.bind(user), 1000);
+
+
+
+
 
 
